@@ -10,8 +10,11 @@ export default {
   			sans: [
   				'var(--font-geist-sans)',
                     ...fontFamily.sans
-                ], 
-			Inter: ["Inter", "sans-serif"],
+                ],
+  			Inter: [
+  				'Inter',
+  				'sans-serif'
+  			]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -58,14 +61,24 @@ export default {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}, 
-			gold: '#EACB1B', 
-			white: '#FFFFFF', 
-			primary_black: '#000000', 
-			primary_grey_blue:'#506E79', 
-			primary_pastel_blue: '#B2C6D6', 
-			primary_baby_blue : '#8CC1D1', 
-			primary_gray: '#8A9EA6',
+  			},
+  			gold: '#EACB1B',
+  			white: '#FFFFFF',
+  			primary_black: '#000000',
+  			primary_grey_blue: '#506E79',
+  			primary_pastel_blue: '#B2C6D6',
+  			primary_baby_blue: '#8CC1D1',
+  			primary_gray: '#8A9EA6',
+  			sidebar: {
+  				DEFAULT: 'hsl(var(--sidebar-background))',
+  				foreground: 'hsl(var(--sidebar-foreground))',
+  				primary: 'hsl(var(--sidebar-primary))',
+  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+  				accent: 'hsl(var(--sidebar-accent))',
+  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+  				border: 'hsl(var(--sidebar-border))',
+  				ring: 'hsl(var(--sidebar-ring))'
+  			}
   		}
   	}
   },
