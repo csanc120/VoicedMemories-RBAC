@@ -31,8 +31,8 @@ export default function AccountLogin(){
                         <button className = "border-2 rounded-md border-gold bg-primary_black mt-5 hover:bg-primary_gray hover:text-black text-white w-full p-3">
                             Sign in to Account 
                         </button>
-                        <Link href = "./ResetPassword" className = "text-blue-500 underline"> Forgot your Password?</Link>
-                        <Link href = "./ResetEmail" className="text-blue-500 underline ">Forgot your Email?</Link>
+                        <Link href = "/ResetPassword" className = "text-blue-500 underline"> Forgot your Password?</Link>
+                        <Link href = "/ResetEmail" className="text-blue-500 underline ">Forgot your Email?</Link>
                     </div>
                 </CardFooter>
             </Card>
