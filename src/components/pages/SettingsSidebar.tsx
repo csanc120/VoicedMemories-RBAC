@@ -1,6 +1,10 @@
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, 
          SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarSeparator,} from "~/components/ui/sidebar";
+import {useSettingsContext } from "../utils/SettingsContext";
+
 export function SettingsSidebar(){
+    const { menuItem, setMenuItem } = useSettingsContext();
+
     return (
         <Sidebar>
             <SidebarHeader>
@@ -15,12 +19,12 @@ export function SettingsSidebar(){
                      <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton>
+                                <SidebarMenuButton onClick={() => setMenuItem("Password")}>
                                     Change Password
                                  </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton>
+                                <SidebarMenuButton onClick={() => setMenuItem("Email")}>
                                     Change Email
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
