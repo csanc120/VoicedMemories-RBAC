@@ -1,6 +1,7 @@
 import { Patient } from "~/app/_components/Dashboards/Patient"
-export default function Dashboard(){
+import { Admin } from "~/app/_components/Dashboards/Admin"
+export default function Dashboard() {
     return (
-        <Patient></Patient>
+        <Admin></Admin>
     )
 }
