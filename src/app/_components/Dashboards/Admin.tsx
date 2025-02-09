@@ -7,22 +7,6 @@ import { useState } from "react";
 export function Admin() {
     let pageRouter = useRouter();
 
-    let Doctors: ClickableItemProps =
-    {
-        imgSrc: "/doctor-icon.png",
-        labelText: "View Caregivers",
-        imgDimensions: { width: 200, height: 200 },
-        pageLink: "/Dashboard/Settings"
-    }
-
-    let settings: ClickableItemProps =
-    {
-        imgSrc: "/setting-line-icon.png",
-        labelText: "Settings",
-        imgDimensions: { width: 200, height: 200 },
-        pageLink: "/Dashboard/Settings"
-    }
-
     const [activePage, setActivePage] = useState<string>("");
 
     return (
