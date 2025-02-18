@@ -7,7 +7,7 @@ export default function AccountLogin(){
             <Card className = "shadow-2xl w-1/2 ">
                 <CardHeader className="text-center"> 
                     <CardTitle className="text-4xl">Patient Login</CardTitle>
-                    <CardDescription>Please Enter your Information Below</CardDescription>
+                    <CardDescription className="text-xl">Please Enter your Information Below</CardDescription>
                 </CardHeader>
                 <CardContent className="flex justify-center">
                     <div className = "w-1/2 space-y-5">
