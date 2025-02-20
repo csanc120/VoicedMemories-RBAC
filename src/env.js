@@ -8,6 +8,11 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    SERVER_REGION: z.string(),
+    CLIENT_ID: z.string(),
+    AUTH_FLOW: z.string(),
+    USER_POOL_ID: z.string(),
+    APP_CLIENT_SECRET: z.string(),
   },
 
   /**
@@ -25,6 +30,11 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    SERVER_REGION: process.env.SERVER_REGION, 
+    CLIENT_ID: process.env.CLIENT_ID,
+    APP_CLIENT_SECRET: process.env.APP_CLIENT_SECRET,
+    AUTH_FLOW: process.env.AUTH_FLOW,
+    USER_POOL_ID: process.env.USER_POOL_ID
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

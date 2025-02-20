@@ -1,25 +1,35 @@
-
 'use client'
 import Link from "next/link"
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "~/components/ui/card"
-import { loginUser } from "~/server/api/utils/CognitoServices"
+import { api } from "~/trpc/react"
+import { useRouter } from "next/navigation"
+
 
 export default function AccountLogin(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [loginError, setLoginError] = useState(false);
+    const [loginError, setLoginError] = useState("");
+    const pageRouter = useRouter();
 
-    async function callLogin() {
-        console.log(loginError);
-        const response = await loginUser(email, password);
-
-        if(response && response.hasOwnProperty("loginError")){
-            setLoginError(true);
-        }else{
-            //TO-DO: Add tokens to hTTP only cookies in trpc, not browser based cookies
-            setLoginError(false);
+    const input = api.userVerifier.checkLogin.useMutation(
+        {onSuccess(data, variables, context) {//User needs password change
+            if(data.type == "validation"){
+                console.log(data.userChallenge);
+                pageRouter.push("/ResetEmail");
+            }else{ //success
+                console.log(data.tokens);
+                pageRouter.push("/Dashboard");
+            }
+        }, 
+        onError(error, variables, context) { //any errors
+            setLoginError(error.message);            
+        },
         }
+    );
+
+    function initLogin() {
+        input.mutate({userName: email, password:password});
     }
 
     return (
@@ -28,7 +38,7 @@ export default function AccountLogin(){
                 <CardHeader className="text-center"> 
                     <CardTitle className="text-4xl">Patient Login</CardTitle>
                     <CardDescription className="text-xl">Please Enter your Information Below</CardDescription>
-                    {loginError && <label className="text-lg text-red-600">Invalid username and/or password. Please Try Again</label>}
+                    {loginError != "" && <label className="text-lg text-red-600">{loginError}</label>}
                 </CardHeader>
                 <CardContent className="flex justify-center">
                     <div className = "w-1/2 space-y-5">
@@ -48,7 +58,7 @@ export default function AccountLogin(){
                 </CardContent>
                 <CardFooter className="flex justify-center">
                     <div className="flex flex-col space-y-2 items-center">
-                        <button className = "border-2 rounded-md border-gold bg-primary_black mt-5 hover:bg-primary_gray hover:text-black text-white w-full p-3" onClick={() => {callLogin()}}>
+                        <button className = "border-2 rounded-md border-gold bg-primary_black mt-5 hover:bg-primary_gray hover:text-black text-white w-full p-3" onClick={() => {initLogin()}}>
                             Sign in to Account 
                         </button>
                         <Link href = "/ResetPassword" className = "text-blue-500 underline"> Forgot your Password?</Link>
