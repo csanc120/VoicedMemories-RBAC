@@ -25,8 +25,10 @@ import { ZodError } from "zod";
 export const createTRPCContext = async (headers:Headers) =>{
     //Handle cookie login
     const cookies = headers.getSetCookie();
-    return {name:"string", userAgent:"Ds"};
-    //Place All cookies into a server location
+    console.log("This contatins hte cookies that were extracted");
+    
+    // return {res: new NextApiResponse()};
+     return {accessToken:"AccessToken", idToken:"TokenID"};
 }
 
 

@@ -1,8 +1,7 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { loginUser } from "../utils/CognitoServices";
+import { getUserDetails, loginUser } from "../utils/CognitoServices";
 import { TRPCError } from "@trpc/server";
-
 
 export const userVerifierRouter = createTRPCRouter({
     checkLogin: publicProcedure
@@ -15,17 +14,31 @@ export const userVerifierRouter = createTRPCRouter({
             const {userName, password} = input;
             const authResponse = await loginUser(userName, password);
             const type = authResponse.type;
-
+            //User authentication failed
             if(type == "error"){
                  throw new TRPCError(
                     {code:"UNAUTHORIZED", 
                      message:"The username and/or password was incorrect!"
                     });
+            //User must reset their password before continuing 
             }else if(type == "validation"){
-                return {type: "validation", userChallenge:authResponse.validationKeys};
+                return {type: "validation", validationKeys: authResponse.validationKeys};
             }
-            //TODO: Tokens should be sent in HTTPOnly Cookie
-            return {type: "success", tokens:authResponse.tokens};
+            //User has been authorized to log into the application
+            return {type: "success", tokens: authResponse.tokens};
         }
-        )
+    ), 
+    getUserInformation: publicProcedure
+        .input(z.string())
+        .query(async ({input}) => {
+            const authResponse = await getUserDetails(input);
+            if(authResponse.type == "error"){
+                throw new TRPCError({
+                    code: "INTERNAL_SERVER_ERROR", 
+                    message: authResponse.message
+                })
+            }
+            return authResponse;
+        }
+    )
 })

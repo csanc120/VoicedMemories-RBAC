@@ -3,21 +3,22 @@
 import { env } from "~/env";
 import {AuthenticationResultType, AuthFlowType, ChallengeName, ChallengeNameType, CognitoIdentityProviderClient, 
         CognitoIdentityProviderClientConfig, 
+        GetUserCommand, 
+        GetUserCommandInput, 
         InitiateAuthCommand, 
         InitiateAuthCommandInput, 
-        InitiateAuthCommandOutput,
         RespondToAuthChallengeCommand,
         RespondToAuthChallengeCommandInput}
         from "@aws-sdk/client-cognito-identity-provider"
 
-import { LoginResponse } from "../Constants/CognitoConsts";
+import { AuthResponse } from "../Constants/CognitoConsts";
 const clientConfigOpts:CognitoIdentityProviderClientConfig = {
     region: env.SERVER_REGION, 
 };
 
 const client = new CognitoIdentityProviderClient(clientConfigOpts);
 
-export async function loginUser(userName:string, password:string):Promise<LoginResponse>{
+export async function loginUser(userName:string, password:string):Promise<AuthResponse>{
     const SECRET_HASH = generateSecretHash(userName);
     let authCommandInput:InitiateAuthCommandInput = {
         AuthFlow: env.AUTH_FLOW as AuthFlowType,
@@ -31,8 +32,8 @@ export async function loginUser(userName:string, password:string):Promise<LoginR
     
     let response,authResult
     try{
-        response = client.send(new InitiateAuthCommand(authCommandInput));
-        authResult = (await response).AuthenticationResult
+        response = await client.send(new InitiateAuthCommand(authCommandInput));
+        authResult = response.AuthenticationResult;
     }catch(exception){
         console.log("The user could not be authenticated!");
         return {type: "error", message: "Username and/or password was incorrect."};
@@ -44,9 +45,10 @@ export async function loginUser(userName:string, password:string):Promise<LoginR
         return {type:"success", tokens:authResult};
     }
 
-    const challengeParameters =  (await response).ChallengeParameters;
-    const challengeName = (await response).ChallengeName;
-    const authSession = (await response).Session;
+    const challengeParameters = response.ChallengeParameters;
+    
+    const challengeName = response.ChallengeName;
+    const authSession = response.Session;
 
     return {type:"validation", validationKeys:
         {challengeName:challengeName, 
@@ -77,6 +79,27 @@ function newUserSignUp(session:string,newPassword:string,firstName:string, famil
         }
        const s =  client.send(new RespondToAuthChallengeCommand(authChallenge))
     }
+
+}
+
+export async function getUserDetails(accessToken: string){
+    const userCommandInput:GetUserCommandInput = {
+        AccessToken: accessToken
+    }
+    let response, userAttributes;
+    try{
+        response = await client.send(new GetUserCommand(userCommandInput));
+        userAttributes = response.UserAttributes;
+    }catch(error){
+        return {type:"error", message:"An error occurred when retrieving user information"};
+    }
+    
+    //If firstName is incorrect, provide a filter for checking if a duplicate given_name exists
+    const firstName = userAttributes?.find((attr) => attr.Name == "given_name")?.Value;
+    const lastName = userAttributes?.find((attr) => attr.Name == "family_name")?.Value;
+    
+    console.log(userAttributes);
+    return {firstName: firstName, lastName:lastName};
 
 }
 

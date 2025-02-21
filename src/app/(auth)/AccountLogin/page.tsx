@@ -13,16 +13,25 @@ export default function AccountLogin(){
     const pageRouter = useRouter();
 
     const input = api.userVerifier.checkLogin.useMutation(
-        {onSuccess(data, variables, context) {//User needs password change
+        {onSuccess(data) {//TODO: User password change page route
             if(data.type == "validation"){
-                console.log(data.userChallenge);
+                console.log(data.validationKeys);
                 pageRouter.push("/ResetEmail");
             }else{ //success
-                console.log(data.tokens);
+                const userTokens = data.tokens;
+                if(userTokens?.IdToken && userTokens.AccessToken && userTokens.RefreshToken){
+                    sessionStorage.setItem("idToken", userTokens?.IdToken);
+                    sessionStorage.setItem("accessToken", userTokens?.AccessToken);
+                    sessionStorage.setItem("refreshToken", userTokens?.RefreshToken);
+                    if(userTokens.ExpiresIn){
+                        sessionStorage.setItem("tokenExp", userTokens.ExpiresIn.toString());
+                    }
+                }
+                //Need ot check route
                 pageRouter.push("/Dashboard");
             }
-        }, 
-        onError(error, variables, context) { //any errors
+        },
+        onError(error) {
             setLoginError(error.message);            
         },
         }
@@ -38,7 +47,7 @@ export default function AccountLogin(){
                 <CardHeader className="text-center"> 
                     <CardTitle className="text-4xl">Patient Login</CardTitle>
                     <CardDescription className="text-xl">Please Enter your Information Below</CardDescription>
-                    {loginError != "" && <label className="text-lg text-red-600">{loginError}</label>}
+                    {loginError != "" && <label className="text-lg text-red-600">{loginError}</label> }
                 </CardHeader>
                 <CardContent className="flex justify-center">
                     <div className = "w-1/2 space-y-5">

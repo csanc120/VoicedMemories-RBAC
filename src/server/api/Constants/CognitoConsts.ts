@@ -1,7 +1,7 @@
 import { AuthenticationResultType, AuthFlowType, ChallengeNameType } from "@aws-sdk/client-cognito-identity-provider";
 //NOTE: Constants now moved into .env file.
 
-export interface LoginResponse {
+export interface AuthResponse {
     type:string, 
     message?:string, 
     tokens?: AuthenticationResultType, 
@@ -12,7 +12,7 @@ export interface LoginResponse {
     }
 }
 
-//Used by trpc (if needed)
+//TRPC API LoginResponse(Similar to the AWS AuthenticaionResponse)
 export interface trpcLoginResponse {
     type:string, 
     validationKeys?: {
