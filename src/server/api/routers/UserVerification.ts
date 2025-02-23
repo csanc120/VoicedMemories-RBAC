@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { getUserDetails, loginUser } from "../utils/CognitoServices";
+import { getUserDetails, loginUser, resetPassword } from "../utils/CognitoServices";
 import { TRPCError } from "@trpc/server";
 
 export const userVerifierRouter = createTRPCRouter({
@@ -40,5 +40,23 @@ export const userVerifierRouter = createTRPCRouter({
             }
             return authResponse;
         }
-    )
+    ), 
+    resetPassword: publicProcedure
+        .input(z.object(
+            {newPassword: z.string(), 
+            previousPassword: z.string(), 
+            accessToken: z.string()
+            }
+        ))
+        .mutation( async ({input, ctx}) =>{
+            const {previousPassword, newPassword, accessToken} = input;
+            const response = await resetPassword(newPassword, previousPassword, accessToken);
+            if(response.type == "error"){
+                throw new TRPCError({
+                    code: "UNAUTHORIZED", 
+                    message: response.message
+                })
+            }
+            return response;
+        })
 })

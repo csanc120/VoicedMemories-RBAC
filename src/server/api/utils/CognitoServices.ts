@@ -1,7 +1,7 @@
 
 'use server'
 import { env } from "~/env";
-import {AuthenticationResultType, AuthFlowType, ChallengeName, ChallengeNameType, CognitoIdentityProviderClient, 
+import {AuthenticationResultType, AuthFlowType, ChallengeName, ChallengeNameType, ChangePasswordCommand, ChangePasswordCommandInput, CognitoIdentityProviderClient, 
         CognitoIdentityProviderClientConfig, 
         GetUserCommand, 
         GetUserCommandInput, 
@@ -12,6 +12,7 @@ import {AuthenticationResultType, AuthFlowType, ChallengeName, ChallengeNameType
         from "@aws-sdk/client-cognito-identity-provider"
 
 import { AuthResponse } from "../Constants/CognitoConsts";
+
 const clientConfigOpts:CognitoIdentityProviderClientConfig = {
     region: env.SERVER_REGION, 
 };
@@ -57,6 +58,23 @@ export async function loginUser(userName:string, password:string):Promise<AuthRe
     }};
     
 }
+
+export async function resetPassword(newPassword:string, previousPassword:string, accessToken:string){
+    const resetPasswordInput:ChangePasswordCommandInput = {
+        AccessToken: accessToken, 
+        ProposedPassword: newPassword,
+        PreviousPassword: previousPassword
+    }
+    let response;
+    try{
+        response = await client.send(new ChangePasswordCommand(resetPasswordInput));
+    }catch(error){
+        return {type:"error", message:"User is not allowed to change their password!"};
+    }
+    return {type:"success", message:"Your password has been updated."};
+}
+
+
 
 
 //TODO: Implement password update for a user that had a temporary password
