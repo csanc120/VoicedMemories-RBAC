@@ -7,7 +7,11 @@ export function ChangeEmail(){
         subHeader: "Use the fields below to enter your current email and new email.", 
         label1Input: "Enter Current Email:", 
         label2Input: "Enter New Email:", 
-        buttonText : "Confirm"
+        buttonText : "Confirm", 
+        buttonAction: () =>{
+            //TO-DO: Implement Me
+            console.log(sessionStorage.getItem("accessToken"));
+        }
     }
 
     return (

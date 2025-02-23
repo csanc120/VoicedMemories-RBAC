@@ -3,9 +3,9 @@ import { ClickableItemProps } from "~/components/pages/ClickableItem";
 import { ItemBar } from "~/components/pages/ItemBar";
 import { useRouter } from "next/navigation";
 
-export function Patient(){
+export function Patient({patientName}:{patientName:string}){
     let pageRouter = useRouter();
-    
+
     let Doctors:ClickableItemProps = 
     {imgSrc:"/doctor-icon.png",
         labelText:"View Caregivers",
@@ -26,7 +26,7 @@ export function Patient(){
                Dashboard Header
             </div>
             <label className="text-4xl pl-7"> 
-                Welcome, {"Username"}
+                Welcome, {patientName}
             </label>
             <div className="flex flex-grow items-center justify-center flex-col">
                 <div className="flex flex-grow">
