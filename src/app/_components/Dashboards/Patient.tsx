@@ -21,8 +21,8 @@ export function Patient(){
     }
 
     return (
-        <div className="flex min-h-screen flex-col font-Inter"> 
-            <div className="border-2 bg-primary_grey_blue text-center font-bold text-5xl">
+        <div className="flex min-h-screen flex-col font-Inter bg-[#001F54] text-[#4CACFE]"> 
+            <div className="border-2 border-[#4CACFE] bg-[#001F54] text-[#4CACFE] text-center font-bold text-5xl">
                Dashboard Header
             </div>
             <label className="text-4xl pl-7"> 
@@ -32,7 +32,7 @@ export function Patient(){
                 <div className="flex flex-grow">
                     <ItemBar clickableItems={[Doctors, settings]}/>
                 </div>
-                <button className = "border-2 rounded-md border-gold bg-primary_black mt-5 hover:bg-primary_gray hover:text-black text-white px-16 py-6 text-2xl">
+                <button className = "border-2 rounded-md border-[#B0E0E6] bg-[#4CACFE] mt-5 hover:bg-[#B0E0E6] hover:text-black text-white  px-16 py-6 text-2xl">
                     Sign Out
                 </button>
             </div>
