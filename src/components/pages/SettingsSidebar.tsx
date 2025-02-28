@@ -7,24 +7,24 @@ export function SettingsSidebar(){
 
     return (
         <Sidebar>
-            <SidebarHeader>
-                Settings
+            <SidebarHeader className="text-xl">
+                Settings Options
             </SidebarHeader>
             <SidebarSeparator />
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>
+                    <SidebarGroupLabel className="text-base">
                         Manage Account
                     </SidebarGroupLabel>
                      <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton onClick={() => setMenuItem("Password")}>
+                                <SidebarMenuButton onClick={() => setMenuItem("Password")} className = "text-base">
                                     Change Password
                                  </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton onClick={() => setMenuItem("Email")}>
+                                <SidebarMenuButton onClick={() => setMenuItem("Email")} className="text-base">
                                     Change Email
                                 </SidebarMenuButton>
                             </SidebarMenuItem>

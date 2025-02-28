@@ -22,11 +22,16 @@ import { ZodError } from "zod";
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-  return {
-    ...opts,
-  };
-};
+export const createTRPCContext = async (headers:Headers) =>{
+    //Handle cookie login
+    const cookies = headers.getSetCookie();
+    console.log("This contatins hte cookies that were extracted");
+    
+    // return {res: new NextApiResponse()};
+     return {accessToken:"AccessToken", idToken:"TokenID"};
+}
+
+
 
 /**
  * 2. INITIALIZATION
