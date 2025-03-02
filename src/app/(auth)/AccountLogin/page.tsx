@@ -44,8 +44,8 @@ export default function AccountLogin(){
     return (
         <div className = "flex min-h-screen items-center justify-center bg-primary_pastel_blue font-Inter">
             <Card className = "shadow-2xl w-1/2 ">
-                <CardHeader className="text-center"> 
-                    <CardTitle className="text-4xl">Patient Login</CardTitle>
+                <CardHeader className = "text-center"> 
+                    <CardTitle className = "text-4xl">Patient Login</CardTitle>
                     <CardDescription className="text-xl">Please Enter your Information Below</CardDescription>
                     {loginError != "" && <label className="text-lg text-red-600">{loginError}</label> }
                 </CardHeader>
