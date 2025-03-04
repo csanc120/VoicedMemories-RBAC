@@ -10,8 +10,8 @@ export default function ResetEmail(){
         setSuccess(true)
     }
     return (
-        <div className = "min-h-screen border-2 border-black flex items-center justify-center font-sans bg-[#4CAFCE]">
-            <Card className="shadow-2xl w-1/2 text-[#001F54]">
+        <div className = "min-h-screen border-2 border-black flex items-center justify-center font-sans bg-healthBlue">
+            <Card className="shadow-2xl w-1/2 text-navyBlue">
                 <CardHeader className="text-center">
                     <CardTitle className = "text-4xl">Reset Email</CardTitle>
                     <CardDescription className="text-xl">Enter the phone number associated with your account <br></br> for a verification code</CardDescription>
