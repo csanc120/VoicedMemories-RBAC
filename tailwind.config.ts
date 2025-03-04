@@ -69,6 +69,10 @@ export default {
   			primary_pastel_blue: '#B2C6D6',
   			primary_baby_blue: '#8CC1D1',
   			primary_gray: '#8A9EA6',
+			healthBlue: '#4CAFCE',
+			navyBlue: '#001F54',
+			dodgerBlue: '#1E90FF',
+			powderBlue: '#B0E0E6',
   			sidebar: {
   				DEFAULT: 'hsl(var(--sidebar-background))',
   				foreground: 'hsl(var(--sidebar-foreground))',
