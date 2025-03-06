@@ -3,6 +3,7 @@ import { Patient } from "~/app/_components/Dashboards/Patient"
 import { Admin } from "~/app/_components/Dashboards/Admin"
 import { api } from "~/trpc/react"
 import { useRouter } from "next/navigation";
+import { Distributor } from "~/app/_components/Dashboards/Distributor";
 
 export default function Dashboard() { 
     let fullName = "";
@@ -33,9 +34,14 @@ export default function Dashboard() {
 
     return (
         // <Admin></Admin>
+        //<Distributor> <Distributor/>
+        // <Patient> <Patient/>
+        // <Cargiver/>
         //To-do: Fix hydration
         <div suppressHydrationWarning = {true}>
-        <Patient patientName = {fullName}/>
+        
+            <Distributor fullName ={"FullName"}/>
+        {/* <Patient patientName = {fullName}/> */}
         </div>
     )
 }
