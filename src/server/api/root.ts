@@ -3,6 +3,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { clientRouter } from "~/server/api/routers/client";
 import { userVerifierRouter } from "./routers/UserVerification";
 
+import { adminRouter } from "~/server/api/routers/admin";
 /**
  * This is the primary router for your server.
  *
@@ -10,7 +11,8 @@ import { userVerifierRouter } from "./routers/UserVerification";
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
-  client: clientRouter, 
+  admin: adminRouter,
+  client: clientRouter,
   userVerifier: userVerifierRouter,
 });
 
