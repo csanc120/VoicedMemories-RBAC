@@ -4,17 +4,17 @@ import { SettingsSidebar } from "~/components/pages/SettingsSidebar";
 import { useState } from "react";
 import { SettingsContext } from "~/components/utils/SettingsContext";
 
-export default function layout({children}:{children:React.ReactNode}){
+export default function layout({ children }: { children: React.ReactNode }) {
     const [menuItem, setMenuItem] = useState("Password");
     return (
-        <SettingsContext.Provider value = {{menuItem, setMenuItem}}>
+        <SettingsContext.Provider value={{ menuItem, setMenuItem }}>
             <SidebarProvider>
-                <SettingsSidebar/>
-                <main className="w-screen bg-primary_pastel_blue">
-                    <header className = "font-bold text-3xl border-2 border-black text-center">Settings Page Header</header>
+                <SettingsSidebar />
+                <main className="w-screen bg-gray-300">
+                    <header className="font-semibold text-4xl bg-[#4cafce] text-center">Settings</header>
                     <div className="w-1/2">
                         {children}
-                    </div> 
+                    </div>
                 </main>
             </SidebarProvider>
         </SettingsContext.Provider>
