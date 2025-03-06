@@ -46,20 +46,20 @@ export default function AccountLogin() {
         <div className="flex min-h-screen items-center justify-center bg-[#001f54] font-Inter">
             <Card className="shadow-2xl w-1/2 ">
                 <CardHeader className="text-center">
-                    <CardTitle className="text-4xl">Patient Login</CardTitle>
-                    <CardDescription className="text-xl">Please Enter your Information Below</CardDescription>
+                    <CardTitle className="text-5xl">Patient Login</CardTitle>
+                    <CardDescription className="text-2xl">Please Enter your Information Below</CardDescription>
                     {loginError != "" && <label className="text-lg text-red-600">{loginError}</label>}
                 </CardHeader>
                 <CardContent className="flex justify-center">
                     <div className="w-1/2 space-y-5">
                         <div className="flex flex-col justify-center space-y-1">
-                            <label className="font-semibold">
+                            <label className="text-xl font-semibold">
                                 Email Address:
                             </label>
-                            <input onChange={(e) => setEmail(e.target.value)} type="email" className="border-black rounded-md border-2 focus:border-primary_blue focus:outline-none p-1" />
+                            <input onChange={(e) => setEmail(e.target.value)} type="email" className="border-black rounded-md border-2 focus:border-primary_baby_blue focus:outline-none p-1" />
                         </div>
                         <div className="flex flex-col justify-center space-y-1">
-                            <label className="font-semibold">
+                            <label className="text-xl font-semibold">
                                 Password:
                             </label>
                             <input onChange={(e) => setPassword(e.target.value)} type="password" className="border-black rounded-md border-2 focus:border-primary_baby_blue focus:outline-none p-1" />
@@ -68,7 +68,7 @@ export default function AccountLogin() {
                 </CardContent>
                 <CardFooter className="flex justify-center">
                     <div className="flex flex-col space-y-2 items-center">
-                        <button className="border-2 rounded-md border-gold bg-[#4cafce] mt-5 hover:bg-[#2c8099] hover:text-black text-white w-full p-3" onClick={() => { initLogin() }}>
+                        <button className="text-2xl border-2 rounded-md border-black bg-[#4cafce] mt-5 hover:bg-[#2c8099] hover:text-black text-black font-semibold w-full p-3" onClick={() => { initLogin() }}>
                             Sign in to Account
                         </button>
                         <Link href="/ResetPassword" className="text-blue-500 underline"> Forgot your Password?</Link>
