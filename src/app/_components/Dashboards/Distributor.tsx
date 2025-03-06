@@ -6,7 +6,7 @@ export function Distributor({fullName}:{fullName:string}){
 
     let [patientLicenses,setPatientLicenses] = useState<number>(10);
     let createPatient:ClickableItemProps = {
-        imgSrc: "/medical.png", 
+        imgSrc: "/addPatient.png", 
         imgDimensions :{
             width: 200,
             height: 200
